@@ -62,6 +62,11 @@ namespace blackjack
     {
         static void Main(string[] args)
         {
+            // Prompt Player for Name
+            Console.WriteLine("Welcome. What's your name? ");
+            string userName = Console.ReadLine();
+
+
             //Play again loop
             var playAgain = "y";
             while (playAgain == "y")
@@ -123,6 +128,21 @@ namespace blackjack
                 // {
                 //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
                 // }
+
+
+                // Create Dealer instance
+                var dealer = new Player();
+                {
+                    dealer.PlayerName = "Dealer";
+                }
+
+                // Create Player instance
+                var humanPlayer = new Player();
+                {
+                    humanPlayer.PlayerName = userName;
+                }
+
+                // Deal initial cards to Dealer
 
 
                 // Prompt for play again

@@ -44,6 +44,20 @@ namespace blackjack
         }
     }
 
+    class Player
+    {
+        public string PlayerName { get; set; }
+        public List<Card> Hand { set; get; }
+        public int HandValue()
+        {
+            int handTotal = 0;
+            foreach (Card cardInHand in Hand)
+            {
+                handTotal = handTotal + cardInHand.Value();
+            }
+            return handTotal;
+        }
+    }
     class Program
     {
         static void Main(string[] args)

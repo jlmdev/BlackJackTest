@@ -48,61 +48,74 @@ namespace blackjack
     {
         static void Main(string[] args)
         {
-            // Create Deck List
-            var deck = new List<Card>();
-            // Define arrays of suits and faces for assignment
-            var assignedSuit = new string[] { "Clubs", "Diamonds", "Hearts", "Spades" };
-            var assignedFace = new string[] { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
-
-            // loops to assign card suits and faces
-            for (var suitIndex = 0; suitIndex < assignedSuit.Length; suitIndex++)
+            //Play again loop
+            var playAgain = "y";
+            while (playAgain == "y")
             {
-                for (var faceIndex = 0; faceIndex < assignedFace.Length; faceIndex++)
+
+                // Create Deck List
+                var deck = new List<Card>();
+                // Define arrays of suits and faces for assignment
+                var assignedSuit = new string[] { "Clubs", "Diamonds", "Hearts", "Spades" };
+                var assignedFace = new string[] { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+
+                // loops to assign card suits and faces
+                for (var suitIndex = 0; suitIndex < assignedSuit.Length; suitIndex++)
                 {
-                    // Assign suit and face to cards
-                    string cardSuit = assignedSuit[suitIndex];
-                    string cardFace = assignedFace[faceIndex];
-                    var newCard = new Card();
-
+                    for (var faceIndex = 0; faceIndex < assignedFace.Length; faceIndex++)
                     {
-                        newCard.Suit = cardSuit;
-                        newCard.Face = cardFace;
+                        // Assign suit and face to cards
+                        string cardSuit = assignedSuit[suitIndex];
+                        string cardFace = assignedFace[faceIndex];
+                        var newCard = new Card();
+
+                        {
+                            newCard.Suit = cardSuit;
+                            newCard.Face = cardFace;
+                        }
+
+                        deck.Add(newCard);
                     }
-
-                    deck.Add(newCard);
                 }
+
+                // Test printing out all of the cards
+                // IMPORTANT!! reference variable.property representing instance of the class's property directly
+                // Results in CS0120: An object reference is required ... error otherwise
+
+                // foreach (var cardName in deck)
+                // {
+                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+                // }
+
+                // Shuffling Algorithm
+                // Consider changing this to method later
+                var numberOfCards = deck.Count();
+                var randomNumberGenerator = new Random();
+
+                for (var rightIndex = numberOfCards - 1; rightIndex > 0; rightIndex--)
+                {
+                    var leftIndex = randomNumberGenerator.Next(rightIndex - 1);
+                    var leftCard = deck[rightIndex];
+                    var rightCard = deck[leftIndex];
+                    deck[rightIndex] = rightCard;
+                    deck[leftIndex] = leftCard;
+                }
+
+                // Test printing out all of the cards
+                // IMPORTANT!! reference variable.property representing instance of the class's property directly
+                // Results in CS0120: An object reference is required ... error otherwise
+
+                // foreach (var cardName in deck)
+                // {
+                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+                // }
+
+
+                // Prompt for play again
+                Console.WriteLine("Would you like to play again? (y/n)");
+                playAgain = Console.ReadLine();
             }
-
-            // Test printing out all of the cards
-            // IMPORTANT!! reference variable.property representing instance of the class's property directly
-            // Results in CS0120: An object reference is required ... error otherwise
-
-            // foreach (var cardName in deck)
-            // {
-            //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
-            // }
-
-            // Shuffling Algorithm
-            var numberOfCards = deck.Count();
-            var randomNumberGenerator = new Random();
-
-            for (var rightIndex = numberOfCards - 1; rightIndex > 0; rightIndex--)
-            {
-                var leftIndex = randomNumberGenerator.Next(rightIndex - 1);
-                var leftCard = deck[rightIndex];
-                var rightCard = deck[leftIndex];
-                deck[rightIndex] = rightCard;
-                deck[leftIndex] = leftCard;
-            }
-
-            // Test printing out all of the cards
-            // IMPORTANT!! reference variable.property representing instance of the class's property directly
-            // Results in CS0120: An object reference is required ... error otherwise
-
-            // foreach (var cardName in deck)
-            // {
-            //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
-            // }
         }
+
     }
 }

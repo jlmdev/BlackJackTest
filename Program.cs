@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace blackjack
 {
@@ -70,6 +71,28 @@ namespace blackjack
 
                     deck.Add(newCard);
                 }
+            }
+
+            // Test printing out all of the cards
+            // IMPORTANT!! reference variable.property representing instance of the class's property directly
+            // Results in CS0120: An object reference is required ... error otherwise
+
+            // foreach (var cardName in deck)
+            // {
+            //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+            // }
+
+            // Shuffling Algorithm
+            var numberOfCards = deck.Count();
+            var randomNumberGenerator = new Random();
+
+            for (var rightIndex = numberOfCards - 1; rightIndex > 0; rightIndex--)
+            {
+                var leftIndex = randomNumberGenerator.Next(rightIndex - 1);
+                var leftCard = deck[rightIndex];
+                var rightCard = deck[leftIndex];
+                deck[rightIndex] = rightCard;
+                deck[leftIndex] = leftCard;
             }
 
             // Test printing out all of the cards

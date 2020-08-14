@@ -47,7 +47,7 @@ namespace blackjack
     class Player
     {
         public string PlayerName { get; set; }
-        public List<Card> Hand { set; get; }
+        public List<Card> Hand = new List<Card>();
         public int HandValue()
         {
             int handTotal = 0;
@@ -134,6 +134,7 @@ namespace blackjack
                 var dealer = new Player();
                 {
                     dealer.PlayerName = "Dealer";
+
                 }
 
                 // Create Player instance
@@ -142,8 +143,27 @@ namespace blackjack
                     humanPlayer.PlayerName = userName;
                 }
 
-                // Deal initial cards to Dealer
 
+                // Deal initial cards to Dealer
+                dealer.Hand.Add(deck[0]);
+                dealer.Hand.Add(deck[1]);
+
+                // Remove dealt cards from Deck
+                deck.RemoveAt(0);
+                deck.RemoveAt(0);
+
+                // TEMPORARY TEST: Display Cards in Dealer's hand and remaining deck
+                foreach (var dealerCard in dealer.Hand)
+                {
+                    Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                }
+
+
+
+                foreach (var cardName in deck)
+                {
+                    Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+                }
 
                 // Prompt for play again
                 Console.WriteLine("Would you like to play again? (y/n)");

@@ -97,15 +97,6 @@ namespace blackjack
                     }
                 }
 
-                // Test printing out all of the cards
-                // IMPORTANT!! reference variable.property representing instance of the class's property directly
-                // Results in CS0120: An object reference is required ... error otherwise
-
-                // foreach (var cardName in deck)
-                // {
-                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
-                // }
-
                 // Shuffling Algorithm
                 // Consider changing this to method later
                 var numberOfCards = deck.Count();
@@ -119,16 +110,6 @@ namespace blackjack
                     deck[rightIndex] = rightCard;
                     deck[leftIndex] = leftCard;
                 }
-
-                // Test printing out all of the cards
-                // IMPORTANT!! reference variable.property representing instance of the class's property directly
-                // Results in CS0120: An object reference is required ... error otherwise
-
-                // foreach (var cardName in deck)
-                // {
-                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
-                // }
-
 
                 // Create Dealer instance
                 var dealer = new Player();
@@ -152,18 +133,6 @@ namespace blackjack
                 deck.RemoveAt(0);
                 deck.RemoveAt(0);
 
-                // TEMPORARY TEST: Display Cards in Dealer's hand and remaining deck
-                // foreach (var dealerCard in dealer.Hand)
-                // {
-                //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                // }
-
-
-
-                // foreach (var cardName in deck)
-                // {
-                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
-                // }
 
                 // Deal initial cards to the Player
                 humanPlayer.Hand.Add(deck[0]);
@@ -175,6 +144,7 @@ namespace blackjack
 
                 // Hit-Stand process
                 var dealAgain = "y";
+                var hitStand = "default";
                 while (dealAgain == "y")
                 {
                     // Show Player cards
@@ -190,15 +160,25 @@ namespace blackjack
                     // Check for Bust condition
                     if (humanPlayer.HandValue() > 21)
                     {
-                        Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
+                        // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
+                        // // Reveal Dealer's Hand
+                        // Console.WriteLine("Dealer's Hand:");
+                        // foreach (var dealerCard in dealer.Hand)
+                        // {
+                        //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                        // }
+                        // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
                         dealAgain = "n";
+                        hitStand = "s";
                         break;
                     }
 
                     // Prompt to hit or stand
-                    var hitStand = "default";
+
                     while ((hitStand != "s") && (hitStand != "h"))
                     {
+
+
                         Console.WriteLine("Do you want to hit or stand?");
                         hitStand = Console.ReadLine();
                         switch (hitStand)
@@ -217,7 +197,62 @@ namespace blackjack
 
                     }
 
+                    // Play Dealer Hand
+                    var dealerStand = "default";
+                    while (dealerStand != "y")
+                    {
+                        // Reveal Dealer's Hand
+                        Console.WriteLine("Dealer's Hand:");
+                        foreach (var dealerCard in dealer.Hand)
+                        {
+                            Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                        }
 
+                        // Check value of Dealer's hand
+                        if (humanPlayer.HandValue() > 21)
+                        {
+                            dealerStand = "y";
+                        }
+                        else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() > 21))
+                        {
+                            dealerStand = "y";
+                        }
+                        else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() < 21))
+                        {
+                            dealer.Hand.Add(deck[0]);
+                            deck.RemoveAt(0);
+                        }
+                        else if (dealer.HandValue() > 21)
+                        {
+                            dealerStand = "y";
+                        }
+                        else
+                        {
+                            dealerStand = "y";
+                        }
+
+                        // Give the current value of the hand
+                        Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
+                    }
+
+                    // Calculate Winner
+                    if (humanPlayer.HandValue() > 21)
+                    {
+                        Console.WriteLine($"{humanPlayer.PlayerName} busts");
+
+                    }
+                    else if (dealer.HandValue() > 21)
+                    {
+                        Console.WriteLine("Dealer busts");
+                    }
+                    else if (humanPlayer.HandValue() > dealer.HandValue())
+                    {
+                        Console.WriteLine($"{humanPlayer.PlayerName} wins!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Dealer wins.");
+                    }
 
                 }
 

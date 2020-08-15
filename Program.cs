@@ -175,20 +175,22 @@ namespace blackjack
 
                     // Prompt to hit or stand
 
-                    while ((hitStand != "s") && (hitStand != "h"))
+                    while (hitStand != "s")
                     {
 
 
                         Console.WriteLine("Do you want to hit or stand?");
-                        hitStand = Console.ReadLine();
-                        switch (hitStand)
+                        var hitStandResponse = Console.ReadLine();
+                        switch (hitStandResponse)
                         {
                             case "h":
                                 humanPlayer.Hand.Add(deck[0]);
                                 deck.RemoveAt(0);
+                                hitStand = "h";
                                 break;
                             case "s":
                                 dealAgain = "n";
+                                hitStand = "s";
                                 break;
                             default:
                                 Console.WriteLine("H or S, please.");
@@ -196,65 +198,66 @@ namespace blackjack
                         }
 
                     }
+                }
+                // Play Dealer Hand
+                // Reveal Dealer's Hand
+                Console.WriteLine("Dealer's Hand:");
+                foreach (var dealerCard in dealer.Hand)
+                {
+                    Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                }
 
-                    // Play Dealer Hand
-                    var dealerStand = "default";
-                    while (dealerStand != "y")
-                    {
-                        // Reveal Dealer's Hand
-                        Console.WriteLine("Dealer's Hand:");
-                        foreach (var dealerCard in dealer.Hand)
-                        {
-                            Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                        }
+                var dealerStand = "default";
+                while (dealerStand != "y")
+                {
 
-                        // Check value of Dealer's hand
-                        if (humanPlayer.HandValue() > 21)
-                        {
-                            dealerStand = "y";
-                        }
-                        else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() > 21))
-                        {
-                            dealerStand = "y";
-                        }
-                        else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() < 21))
-                        {
-                            dealer.Hand.Add(deck[0]);
-                            deck.RemoveAt(0);
-                        }
-                        else if (dealer.HandValue() > 21)
-                        {
-                            dealerStand = "y";
-                        }
-                        else
-                        {
-                            dealerStand = "y";
-                        }
-
-                        // Give the current value of the hand
-                        Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
-                    }
-
-                    // Calculate Winner
+                    // Check value of Dealer's hand
                     if (humanPlayer.HandValue() > 21)
                     {
-                        Console.WriteLine($"{humanPlayer.PlayerName} busts");
-
+                        dealerStand = "y";
+                    }
+                    else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() > 21))
+                    {
+                        dealerStand = "y";
+                    }
+                    else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() < 21))
+                    {
+                        dealer.Hand.Add(deck[0]);
+                        deck.RemoveAt(0);
                     }
                     else if (dealer.HandValue() > 21)
                     {
-                        Console.WriteLine("Dealer busts");
-                    }
-                    else if (humanPlayer.HandValue() > dealer.HandValue())
-                    {
-                        Console.WriteLine($"{humanPlayer.PlayerName} wins!");
+                        dealerStand = "y";
                     }
                     else
                     {
-                        Console.WriteLine("Dealer wins.");
+                        dealerStand = "y";
                     }
 
+                    // Give the current value of the hand
+                    Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
                 }
+
+                // Calculate Winner
+                if (humanPlayer.HandValue() > 21)
+                {
+                    Console.WriteLine($"{humanPlayer.PlayerName} busts");
+
+                }
+                else if (dealer.HandValue() > 21)
+                {
+                    Console.WriteLine("Dealer busts");
+                }
+                else if (humanPlayer.HandValue() > dealer.HandValue())
+                {
+                    Console.WriteLine($"{humanPlayer.PlayerName} wins!");
+                }
+                else
+                {
+                    Console.WriteLine("Dealer wins.");
+                }
+
+
 
                 // Prompt for play again
                 Console.WriteLine("Would you like to play again? (y/n)");

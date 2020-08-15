@@ -242,6 +242,9 @@ namespace blackjack
                     {
                         Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
                     }
+
+                    Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
+
                     // Check value of Dealer's hand
                     if (humanPlayer.HandValue() > 21)
                     {
@@ -255,6 +258,7 @@ namespace blackjack
                     {
                         dealer.Hand.Add(deck[0]);
                         deck.RemoveAt(0);
+                        dealerStand = "n";
                     }
                     else if (dealer.HandValue() > 21)
                     {
@@ -264,10 +268,13 @@ namespace blackjack
                     {
                         dealerStand = "y";
                     }
-
-                    // Give the current value of the hand
-                    Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
                 }
+                // Give the current value of the hand
+                // if (dealerStand != "default")
+                // {
+                //     Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
+                // }
+
 
                 // Calculate Winner
                 if (humanPlayer.HandValue() > 21)

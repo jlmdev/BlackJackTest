@@ -153,16 +153,31 @@ namespace blackjack
                 deck.RemoveAt(0);
 
                 // TEMPORARY TEST: Display Cards in Dealer's hand and remaining deck
-                foreach (var dealerCard in dealer.Hand)
+                // foreach (var dealerCard in dealer.Hand)
+                // {
+                //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                // }
+
+
+
+                // foreach (var cardName in deck)
+                // {
+                //     Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+                // }
+
+                // Deal initial cards to the Player
+                humanPlayer.Hand.Add(deck[0]);
+                humanPlayer.Hand.Add(deck[1]);
+
+                // Remove dealt cards from deck
+                deck.RemoveAt(0);
+                deck.RemoveAt(0);
+
+                // Show Player cards
+                Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
+                foreach (var playerCard in humanPlayer.Hand)
                 {
-                    Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                }
-
-
-
-                foreach (var cardName in deck)
-                {
-                    Console.WriteLine($"{cardName.Face} of {cardName.Suit} with value of {cardName.Value()}");
+                    Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
                 }
 
                 // Prompt for play again

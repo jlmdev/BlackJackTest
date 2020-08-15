@@ -144,40 +144,67 @@ namespace blackjack
 
                 // Hit-Stand process
                 var dealAgain = "y";
-                var hitStand = "default";
+                var hitStandLoop = "y";
                 while (dealAgain == "y")
                 {
                     // Show Player cards
-                    Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
-                    foreach (var playerCard in humanPlayer.Hand)
-                    {
-                        Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
-                    }
+                    // Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
+                    // foreach (var playerCard in humanPlayer.Hand)
+                    // {
+                    //     Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
+                    // }
 
                     // Give the current value of the hand
-                    Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
+                    // Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
 
                     // Check for Bust condition
-                    if (humanPlayer.HandValue() > 21)
-                    {
-                        // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
-                        // // Reveal Dealer's Hand
-                        // Console.WriteLine("Dealer's Hand:");
-                        // foreach (var dealerCard in dealer.Hand)
-                        // {
-                        //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                        // }
-                        // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
-                        dealAgain = "n";
-                        hitStand = "s";
-                        break;
-                    }
+                    // if (humanPlayer.HandValue() > 21)
+                    // {
+                    //     // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
+                    //     // // Reveal Dealer's Hand
+                    //     // Console.WriteLine("Dealer's Hand:");
+                    //     // foreach (var dealerCard in dealer.Hand)
+                    //     // {
+                    //     //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                    //     // }
+                    //     // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
+                    //     dealAgain = "n";
+                    //     hitStandLoop = "n";
+                    //     break;
+                    // }
 
                     // Prompt to hit or stand
 
-                    while (hitStand != "s")
+                    while (hitStandLoop != "n")
                     {
+                        // Show Player cards
+                        Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
+                        foreach (var playerCard in humanPlayer.Hand)
+                        {
+                            Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
+                        }
 
+                        // Give the current value of the hand
+                        Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
+
+                        // Check for Bust condition
+                        if (humanPlayer.HandValue() > 21)
+                        {
+                            // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
+                            // // Reveal Dealer's Hand
+                            // Console.WriteLine("Dealer's Hand:");
+                            // foreach (var dealerCard in dealer.Hand)
+                            // {
+                            //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                            // }
+                            // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
+                            dealAgain = "n";
+                            hitStandLoop = "n";
+                            break;
+                        }
+
+                        // Give the current value of the hand
+                        // Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
 
                         Console.WriteLine("Do you want to hit or stand?");
                         var hitStandResponse = Console.ReadLine();
@@ -186,11 +213,11 @@ namespace blackjack
                             case "h":
                                 humanPlayer.Hand.Add(deck[0]);
                                 deck.RemoveAt(0);
-                                hitStand = "h";
+                                hitStandLoop = "y";
                                 break;
                             case "s":
                                 dealAgain = "n";
-                                hitStand = "s";
+                                hitStandLoop = "n";
                                 break;
                             default:
                                 Console.WriteLine("H or S, please.");

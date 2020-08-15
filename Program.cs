@@ -173,11 +173,52 @@ namespace blackjack
                 deck.RemoveAt(0);
                 deck.RemoveAt(0);
 
-                // Show Player cards
-                Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
-                foreach (var playerCard in humanPlayer.Hand)
+                // Hit-Stand process
+                var dealAgain = "y";
+                while (dealAgain == "y")
                 {
-                    Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
+                    // Show Player cards
+                    Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
+                    foreach (var playerCard in humanPlayer.Hand)
+                    {
+                        Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
+                    }
+
+                    // Give the current value of the hand
+                    Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
+
+                    // Check for Bust condition
+                    if (humanPlayer.HandValue() > 21)
+                    {
+                        Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
+                        dealAgain = "n";
+                        break;
+                    }
+
+                    // Prompt to hit or stand
+                    var hitStand = "default";
+                    while ((hitStand != "s") && (hitStand != "h"))
+                    {
+                        Console.WriteLine("Do you want to hit or stand?");
+                        hitStand = Console.ReadLine();
+                        switch (hitStand)
+                        {
+                            case "h":
+                                humanPlayer.Hand.Add(deck[0]);
+                                deck.RemoveAt(0);
+                                break;
+                            case "s":
+                                dealAgain = "n";
+                                break;
+                            default:
+                                Console.WriteLine("H or S, please.");
+                                break;
+                        }
+
+                    }
+
+
+
                 }
 
                 // Prompt for play again

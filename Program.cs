@@ -147,33 +147,6 @@ namespace blackjack
                 var hitStandLoop = "y";
                 while (dealAgain == "y")
                 {
-                    // Show Player cards
-                    // Console.WriteLine($"{humanPlayer.PlayerName}'s cards:");
-                    // foreach (var playerCard in humanPlayer.Hand)
-                    // {
-                    //     Console.WriteLine($"{playerCard.Face} of {playerCard.Suit} with value of {playerCard.Value()}");
-                    // }
-
-                    // Give the current value of the hand
-                    // Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
-
-                    // Check for Bust condition
-                    // if (humanPlayer.HandValue() > 21)
-                    // {
-                    //     // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
-                    //     // // Reveal Dealer's Hand
-                    //     // Console.WriteLine("Dealer's Hand:");
-                    //     // foreach (var dealerCard in dealer.Hand)
-                    //     // {
-                    //     //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                    //     // }
-                    //     // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
-                    //     dealAgain = "n";
-                    //     hitStandLoop = "n";
-                    //     break;
-                    // }
-
-                    // Prompt to hit or stand
 
                     while (hitStandLoop != "n")
                     {
@@ -190,21 +163,12 @@ namespace blackjack
                         // Check for Bust condition
                         if (humanPlayer.HandValue() > 21)
                         {
-                            // Console.WriteLine($"{humanPlayer.PlayerName} busts. Dealer Wins.");
-                            // // Reveal Dealer's Hand
-                            // Console.WriteLine("Dealer's Hand:");
-                            // foreach (var dealerCard in dealer.Hand)
-                            // {
-                            //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                            // }
-                            // // Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
                             dealAgain = "n";
                             hitStandLoop = "n";
                             break;
                         }
 
                         // Give the current value of the hand
-                        // Console.WriteLine($"Your current hand is worth {humanPlayer.HandValue()} points");
 
                         Console.WriteLine("Do you want to hit or stand?");
                         var hitStandResponse = Console.ReadLine();
@@ -228,11 +192,6 @@ namespace blackjack
                 }
                 // Play Dealer Hand
                 // Reveal Dealer's Hand
-                // Console.WriteLine("Dealer's Hand:");
-                // foreach (var dealerCard in dealer.Hand)
-                // {
-                //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                // }
 
                 var dealerStand = "default";
                 while (dealerStand != "y")
@@ -269,12 +228,6 @@ namespace blackjack
                         dealerStand = "y";
                     }
                 }
-                // Give the current value of the hand
-                // if (dealerStand != "default")
-                // {
-                //     Console.WriteLine($"Dealer's hand is worth {dealer.HandValue()} points");
-                // }
-
 
                 // Calculate Winner
                 if (humanPlayer.HandValue() > 21)
@@ -294,8 +247,6 @@ namespace blackjack
                 {
                     Console.WriteLine("Dealer wins.");
                 }
-
-
 
                 // Prompt for play again
                 Console.WriteLine("Would you like to play again? (y/n)");

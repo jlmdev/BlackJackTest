@@ -228,16 +228,20 @@ namespace blackjack
                 }
                 // Play Dealer Hand
                 // Reveal Dealer's Hand
-                Console.WriteLine("Dealer's Hand:");
-                foreach (var dealerCard in dealer.Hand)
-                {
-                    Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
-                }
+                // Console.WriteLine("Dealer's Hand:");
+                // foreach (var dealerCard in dealer.Hand)
+                // {
+                //     Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                // }
 
                 var dealerStand = "default";
                 while (dealerStand != "y")
                 {
-
+                    Console.WriteLine("Dealer's Hand:");
+                    foreach (var dealerCard in dealer.Hand)
+                    {
+                        Console.WriteLine($"{dealerCard.Face} of {dealerCard.Suit} with value of {dealerCard.Value()}");
+                    }
                     // Check value of Dealer's hand
                     if (humanPlayer.HandValue() > 21)
                     {
@@ -247,7 +251,7 @@ namespace blackjack
                     {
                         dealerStand = "y";
                     }
-                    else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() < 21))
+                    else if ((dealer.HandValue() < 17) && (humanPlayer.HandValue() < 22))
                     {
                         dealer.Hand.Add(deck[0]);
                         deck.RemoveAt(0);

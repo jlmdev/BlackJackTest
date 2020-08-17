@@ -104,7 +104,7 @@ namespace blackjack
 
                 for (var rightIndex = numberOfCards - 1; rightIndex > 0; rightIndex--)
                 {
-                    var leftIndex = randomNumberGenerator.Next(rightIndex - 1);
+                    var leftIndex = randomNumberGenerator.Next(rightIndex);
                     var leftCard = deck[rightIndex];
                     var rightCard = deck[leftIndex];
                     deck[rightIndex] = rightCard;

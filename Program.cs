@@ -78,24 +78,6 @@ namespace blackjack
                 var assignedSuit = new string[] { "Clubs", "Diamonds", "Hearts", "Spades" };
                 var assignedFace = new string[] { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 
-                // loops to assign card suits and faces
-                // for (var suitIndex = 0; suitIndex < assignedSuit.Length; suitIndex++)
-                // {
-                //     for (var faceIndex = 0; faceIndex < assignedFace.Length; faceIndex++)
-                //     {
-                //         // Assign suit and face to cards
-                //         string cardSuit = assignedSuit[suitIndex];
-                //         string cardFace = assignedFace[faceIndex];
-                //         var newCard = new Card();
-
-                //         {
-                //             newCard.Suit = cardSuit;
-                //             newCard.Face = cardFace;
-                //         }
-
-                //         deck.Add(newCard);
-                //     }
-                // }
 
                 // loops to assign card suits and faces
                 foreach (var suit in assignedSuit)

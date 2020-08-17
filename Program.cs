@@ -111,7 +111,7 @@ namespace blackjack
                     deck[leftIndex] = leftCard;
                 }
 
-                // Create Dealer instance
+                // Create Dealer instance 
                 var dealer = new Player();
                 {
                     dealer.PlayerName = "Dealer";
